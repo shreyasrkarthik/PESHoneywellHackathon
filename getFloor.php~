@@ -1,0 +1,37 @@
+<?php
+  
+  $con = mysqli_connect("localhost","root","crap","Honeywell");
+  if (mysqli_connect_errno())
+  {
+      die('Could not connect to the server');
+  }
+  mysqli_select_db($con,"user_table");
+
+  $uid = $_POST[userid];
+
+  $sql="SELECT u_router_mac FROM user_table where u_id='$uid'";
+  $result = mysqli_query($con,$sql);
+  if ($result)
+  {
+      while ($row=mysqli_fetch_row($result))
+      {
+          $router_mac = $row[0]
+	  mysqli_select_db($con,"user_table");
+          $sql2="SELECT floor,pillar,post FROM router_table where router_mac='$router_mac'";
+          $result2 = mysqli_query($con,$sql);
+          if ($result2)
+          {
+              while ($row=mysqli_fetch_row($result))
+              { 
+                  print($row);
+              }
+          }
+      }
+  }      
+  else
+  {
+    die("No users found");
+    
+  }
+  mysqli_close($con)
+?>
