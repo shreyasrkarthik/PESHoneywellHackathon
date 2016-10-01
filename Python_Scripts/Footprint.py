@@ -14,7 +14,7 @@ def connect():
 	User_MAC = getMacAddress()	
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 	#host = socket.gethostname()
-	server_address = ('116.202.117.171', 3070)
+	server_address = ('localhost', 3070)
 	print 'connecting to %s port %s' % server_address
 	try:
 		s.connect(server_address)
@@ -42,7 +42,8 @@ def sendMAC():
 		s.sendall(data)
 	except Exception as inst:
 		print inst
-	threading.Timer((60.0 * 1), sendMAC).start()
+	#s.close()
+	threading.Timer((60.0 * 1), connect).start()
 
 def getMacAddress(): 
     if sys.platform == 'win32': 
