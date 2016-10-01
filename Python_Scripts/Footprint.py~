@@ -42,7 +42,8 @@ def sendMAC():
 		s.sendall(data)
 	except Exception as inst:
 		print inst
-	threading.Timer((60.0 * 1), sendMAC).start()
+	#s.close()
+	threading.Timer((60.0 * 1), connect).start()
 
 def getMacAddress(): 
     if sys.platform == 'win32': 

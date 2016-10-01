@@ -21,7 +21,11 @@ def insertRMAC(u_mac, router_mac):
 
 #main
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+<<<<<<< HEAD
 server_address = ('192.168.1.101', 3070)
+=======
+server_address = ('localhost', 3070)
+>>>>>>> f3cbe693e475e7217f7103c1e8273acc2d380b0b
 print 'starting up on %s port %s' % server_address
 sock.bind(server_address)
 sock.listen(1)
@@ -32,7 +36,16 @@ while True:
     print connection
     while True:
         data = connection.recv(100).strip()
+<<<<<<< HEAD
         user_mac,router_mac = data.split(",")
         print(user_mac,router_mac)
         if(insertRMAC(user_mac, router_mac)==1):
         	print("Successfully inserted <username,router_mac>")
+=======
+	if(data is not None):
+		#print data
+		user_mac,router_mac = data.split(",")
+		print user_mac,router_mac 
+		#if(insertRMAC(user_mac, router_mac)==1):
+		#	print("Successfully inserted <username,router_mac>")	
+>>>>>>> f3cbe693e475e7217f7103c1e8273acc2d380b0b
