@@ -14,7 +14,7 @@ def connect():
 	User_MAC = getMacAddress()	
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 	#host = socket.gethostname()
-	server_address = ('localhost', 3070)
+	server_address = ('116.202.117.171', 3070)
 	print 'connecting to %s port %s' % server_address
 	try:
 		s.connect(server_address)
