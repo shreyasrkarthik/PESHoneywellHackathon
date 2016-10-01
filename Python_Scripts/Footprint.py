@@ -21,13 +21,19 @@ def connect():
 	except Exception as inst:
 		print inst
 
-def sendMAC():
-	# os.system("ip route list | awk 'FNR == 1 {print $3}'")
-	direct_output = subprocess.check_output("ip route list | awk 'FNR == 1 {print $3}'", shell=True)	
-	ARPCommand = "arp "  + direct_output.strip() + " | awk 'FNR == 2 {print $3}'"
-	# print ARPCommand 
-	MACAddress  = (subprocess.check_output(ARPCommand, shell=True)).strip()
-	# print MACAddress
+def sendMAC(): 
+	if sys.platform == 'win32': 
+		direct_output = subprocess.check_output('ipconfig | findstr "Default Gateway"', shell = True)
+		valid_ip = ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', direct_output)	
+		ARPCommand = "ARP -a "  + valid_ip[0]
+		MACAddress  = (subprocess.check_output(ARPCommand, shell=True))
+		MACAddress  = re.findall(r'(?<!-)(?:[0-9a-f]{2}[:-]){5}[0-9a-f]{2}(?!-)',MACAddress)[0].replace('-',":")
+
+	else: 
+		# os.system("ip route list | awk 'FNR == 1 {print $3}'")
+		direct_output = subprocess.check_output("ip route list | awk 'FNR == 1 {print $3}'", shell=True)	
+		ARPCommand = "arp "  + direct_output.strip() + " | awk 'FNR == 2 {print $3}'"
+		MACAddress  = (subprocess.check_output(ARPCommand, shell=True)).strip()
 	global User_MAC
 	data = User_MAC + "," + MACAddress
 	try:
