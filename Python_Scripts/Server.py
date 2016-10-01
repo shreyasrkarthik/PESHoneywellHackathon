@@ -35,6 +35,6 @@ while True:
     if(data is not None):
 		user_mac,router_mac = data.split(",")
 		print user_mac,router_mac 
-		if(insertRMAC(user_mac, router_mac)==1):
-			print("Successfully inserted <username,router_mac>")
+		# if(insertRMAC(user_mac, router_mac)==1):
+			# print("Successfully inserted <username,router_mac>")
 	

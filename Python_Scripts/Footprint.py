@@ -4,10 +4,10 @@ import os
 import subprocess
 import threading
 import re
-# from apscheduler.scheduler import Scheduler
 
 s = ""
 User_MAC = ""
+iswlan = 0
 def connect():
 	global User_MAC
 	global s
@@ -22,19 +22,31 @@ def connect():
 	except Exception as inst:
 		print inst
 
-def sendMAC(): 
-	if sys.platform == 'win32': 
-		direct_output = subprocess.check_output('ipconfig | findstr "Default Gateway"', shell = True)
-		valid_ip = ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', direct_output)	
-		ARPCommand = "ARP -a "  + valid_ip[0]
-		MACAddress  = (subprocess.check_output(ARPCommand, shell=True))
-		MACAddress  = re.findall(r'(?<!-)(?:[0-9a-f]{2}[:-]){5}[0-9a-f]{2}(?!-)',MACAddress)[0].replace('-',":")
+def sendMAC():
+	global iswlan
+	iswlan = 0
+	if sys.platform == 'win32':
+		if(subprocess.check_output('', shell = True)== 'wlan0'):
+			iswlan = 1
+			#Your code here
+		else: 
+			direct_output = subprocess.check_output('ipconfig | findstr "Default Gateway"', shell = True)
+			valid_ip = ip = re.findall( r'[0-9]+(?:\.[0-9]+){3}', direct_output)	
+			ARPCommand = "ARP -a "  + valid_ip[0]
+			MACAddress  = (subprocess.check_output(ARPCommand, shell=True))
+			MACAddress  = re.findall(r'(?<!-)(?:[0-9a-f]{2}[:-]){5}[0-9a-f]{2}(?!-)',MACAddress)[0].replace('-',":")
 
 	else: 
-		# os.system("ip route list | awk 'FNR == 1 {print $3}'")
-		direct_output = subprocess.check_output("ip route list | awk 'FNR == 1 {print $3}'", shell=True)	
-		ARPCommand = "arp "  + direct_output.strip() + " | awk 'FNR == 2 {print $3}'"
-		MACAddress  = (subprocess.check_output(ARPCommand, shell=True)).strip()
+		if(subprocess.check_output("route | awk 'FNR == 3 {print $8}'", shell = True).strip() == "wlan0"):
+			iswlan = 1
+			#User Essid but named as MACAddress
+			ESSID = subprocess.check_output('iwlist wlan0 scanning | grep ESSID',shell = True).strip().split()[0]
+			MACAddress = ESSID.split(':')[1]
+
+		else:
+			direct_output = subprocess.check_output("ip route list | awk 'FNR == 1 {print $3}'", shell=True)			
+			ARPCommand = "arp "  + direct_output.strip() + " | awk 'FNR == 2 {print $3}'"
+			MACAddress  = (subprocess.check_output(ARPCommand, shell=True)).strip()
 	global User_MAC
 	data = User_MAC + "," + MACAddress
 	try:
@@ -42,7 +54,6 @@ def sendMAC():
 		s.sendall(data)
 	except Exception as inst:
 		print inst
-	#s.close()
 	threading.Timer((60.0 * 1), connect).start()
 
 def getMacAddress(): 
