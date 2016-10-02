@@ -1,0 +1,4 @@
+:top
+timeout 10 > NUL
+start /d "\dist" footprint.exe
+goto top

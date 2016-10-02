@@ -1,0 +1,7 @@
+- How to run the Linux/MAC Application
+	- The Linux/MAC application is in .sh format, this can be run using following command "sh footprint.sh", it can also be placed as a startup program to avoid manually running the program.
+	- The application's job is to find the router/essid the user is connected to.
+	- You're given a .sh file named "footprint.sh" and a ".desktop" file of the same ".sh" file
+	- Here's how you place the .desktop file in startup directory
+		- place the "footprint.desktop" in the "usr/share/applications" directory if its Linux
+		- place the "footprint.desktop" in the "SystemPreferences/Users&Groups/LoginItems" if its MAC

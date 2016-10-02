@@ -1,0 +1,64 @@
+- How to get the website running.
+	
+	Prerequisites:
+		1. PHPMyAdmin
+		2. WAMP/XAMP/LAMP server (Depending on the OS)
+		
+	- There are three sample SQL files provided for you to getting the website running.
+	- Import all these 3 .sql files in phpMyAdmin, before doing that setup a DB in the same
+	- By following the above steps we are able to setup the DB for server to access.
+
+	Website:
+		- This has two folder and an HTML file
+		- 1st folder "css" has all the css files required to achieve the Design and functionalities.
+		- 2nd folder "img" has an image which is used as a background to the portal
+		- The HTML has to be loaded in the browser
+
+	Now placing these files in the right directory
+	
+	1. LAMP server
+		- Place the given set of files in the following directory "/var/www/html/"
+	2. WAMP/XAMP server
+		- Place the given set of files in the following directory "c:\wamp\www\"
+
+	Once all these files are placed in the right directory, open "http://localhost/index.html" in the browser.
+
+
+- How to run the server application.
+	- Place the server's .sh file in the desired directory, now run the file as follows "sh server.sh"
+	- This will make sure that the server is running 24x7 listening for requests.
+
+
+- How to run the windows application.
+	- The windows application is in .exe format, this is run using a batch file, which can be placed as a startup program. 
+	- The application's job is to find the router/essid the user is connected to.
+	- You're given a "dist" directory and .bat file.
+	- Now run the .bat file by double clicking on it.
+	- Or place the .bat file in the startup directory to avoid running it manually. Here's how you do it
+		
+	- Run a batch file at boot in Windows 8 and 10 users
+
+		- Create a shortcut to the batch file.
+		- Once the shortcut has been created, right-click the file and select Cut.
+		- Press the Start button and type Run and press enter.
+		- In the Run window, type shell:startup to open the Startup folder.
+		- Once the Startup folder has been opened, click the Home tab at the top of the folder and select Paste to paste the shortcut into the folder. 
+
+	- Run a batch file at boot in Windows 98, XP, NT, 2000, Vista, and 7
+
+		- Create a shortcut to the batch file.
+		- Once the shortcut has been created, right-click the file and select Cut.
+		- Click Start, then Programs or All Programs. Find the Startup folder and right-click that folder, then select Open.
+		- Once the Startup folder has been opened, click Edit in the menu bar, then Paste to paste the shortcut into the startup folder. If you do not see the menu bar, press the Alt key to make the menu bar visible.
+
+	- Viola! The application is running!
+
+- How to run the Linux/MAC Application
+	- The Linux/MAC application is in .sh format, this can be run using following command "sh footprint.sh", it can also be placed as a startup program to avoid manually running the program.
+	- The application's job is to find the router/essid the user is connected to.
+	- You're given a .sh file named "footprint.sh" and a ".desktop" file of the same ".sh" file
+	- Here's how you place the .desktop file in startup directory
+		- place the "footprint.desktop" in the "usr/share/applications" directory if its Linux
+		- place the "footprint.desktop" in the "SystemPreferences/Users&Groups/LoginItems" if its MAC
+
+NOTE: Run the server program first and then footprint programs can be run in any number of systems

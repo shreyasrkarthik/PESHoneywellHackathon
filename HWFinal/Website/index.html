@@ -50,6 +50,7 @@
                 if(xhr.readyState == 4 && xhr.status == 200){
                     pos_details = xhr.responseText;
                     pos_array = pos_details.split(" ");
+                    window.alert(pos_array.length)
                     if(pos_array.length==3){
                    		 document.getElementById("output").innerHTML = "Your peer is in floor "+pos_array[0]+" pillar number "+pos_array[1]+ " post number "+pos_array[2]; 	
                     }

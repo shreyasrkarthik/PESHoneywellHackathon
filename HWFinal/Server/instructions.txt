@@ -1,0 +1,3 @@
+- How to run the server application.
+	- Place the server's .sh file in the desired directory, now run the file as follows "sh server.sh"
+	- This will make sure that the server is running 24x7 listening for requests.

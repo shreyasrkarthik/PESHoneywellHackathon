@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=run_footprint
+Exec=/usr/bin/run_footprint.sh
+Type=Application
+Terminal=false
+Name[en_IN]=footprint

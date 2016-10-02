@@ -1,0 +1,76 @@
+Objective: Agile Workspace seat locater
+
+Problem statement: 
+	- Determine the seating of any individual in an Open Seating environment. Given username/employee-id determine his/her position based on the router they are connected to. To do the following we had to write an application that resides on the employee's system.
+
+Output:
+	- A simple Web portal where employee’s floor,pillar and post numbers are displayed given employee-id.
+
+Description:
+	- Web portal:
+		- We've used Bootstrap with AJAX to achieve the desired output.
+		- Bootstrap makes the portal responsive, hence our portal can be accessed by any device independent of the size.
+		- We've used a MySQL database for storing employee's and router's details.
+		- Accessing the database is done using PHP.
+		- Given username,his/her has to be determined
+		- Here is the algorithm that we followed
+			1. Find the user's MAC address by querying the appropriate table
+			2. After getting the User's MAC, find its router's MAC/ESSID 
+			3. Finally, look for the floor/post/pillar the router is located in.
+		- The technologies used for developing the website are Bootstrap, PHP, MySQL, AJAX.
+
+	- Windows Application
+		- The windows application is in .exe format, this is run using a batch file, which can be placed as a startup program. 
+		- The application's job is to find the router/essid the user is connected to.
+		- The .bat file makes sure that the application is called every 30 minutes, so that the entry is made in the database about the employee's location. Hence the entries in the table are periodically updated.
+		- We've used python to achieve the same. 
+		- This is the algorithm that we followed.
+			1. Check if the user is connected to the network.
+			2. If he/she is, check weather they're connected to Ethernet(eth0) or WiFi(wlan)
+			3. Based on the type of network they're connected to, we send data to server.
+			4. If the user is connected to wlan, we send server the ESSID of the WiFi
+			5. If the user user is connected to eth0, we send server the MAC address of the router the user is connected to
+			6. Not only that we also send the MAC address of the system to which the user is connected to, for identification of the user.
+
+	- UNIX/MAC Application
+		- Here the application is in .sh format, this can be run using a command/desktop file accordingly. Later the same can be placed as a startup program to avoid running the application again and again.
+		- Even here the application is every 30 minutes so that the user's entry is updated to his/her most recent location
+		- The algorithm and rest of the details are similar to what was followed for windows.
+
+	- MySQL DataBase
+		- Here there are three tables
+			1. Mapping of Router's MAC/ESSID to the floor/post/pillar it is in (Given)
+			2. Mapping of Employee to his/her MAC Address (Given)
+			3. Mapping the Employee's id to Router's MAC/ESSID (TODO)
+		- Out of the three tables the first two are given, hence the application's job is to fill appropriate entry in the third table and make sure that the entries are updated.
+		- The entries are updated in such a way that when a user queries for the his peer's location,it can be identified by using the 3 tables.
+		- Now coming to structure of the tables
+			1. <Router-MAC/ESSID, Floor, Pillar, Post>
+			2. <UserName, UserMACAddress>
+			3. <UserName, Router-MAC/ESSID>
+
+	- Server side application
+		- On the server side, we listen on a particular port and hence handle the incoming requests which usually contains the userMAC and the routerMAC/ESSID that the user is connected to.
+		- Once the MACs are received we close the current connection to avoid the users to send junk data.
+		- Next comes the part where the MAC has to be entered in the MySQL DB.
+		- For this we use python MySQLdb module, from the userMAC we find the corresponding username, once that is done, we make our entry in the 3rd table of the DB.
+		- We assume that the server code is run on the Unix platform hence have developed the application suitably.
+		- Here the application is in .sh format, this can be run using a .desktop file accordingly.
+		- Once the .desktop file starts running, it listens for all the incoming request and handles them accordingly.
+		- For every valid entry that the server gets, it either updates the DB entry or creates a new one.
+
+
+What had we dreamt?
+	- Our goal was to develop a system that can determine the user's location seamlessly and hence can be accessed by any of his peers. (refer: Problem Statement)
+	- We wanted to make the software platform independent and memory efficient.
+	- We wanted the software to be accessed by all types of devices.
+	- We wanted to host the website.
+
+What did we achieve?
+	- We achieved all of our goals expect for hosting the website due to limitation of resources and time.
+
+How would we improve the product?
+	- We'd like to improve upon few things in the product given time
+		- Right now, we've 2  different types of applications one for windows and another for MAC and Linux. We want to make it universal. 
+		- And we'd like to improve the algorithm, right now, the algorithm makes an entry in the DB every 30 minutes, which is not necessary, we want to make an entry only when the employee connects his system to a new network.
+		- We also would like to make this product feasible for mobiles and tablets (i.e., backend part)  

@@ -1,0 +1,24 @@
+- How to get the website running.
+	
+	Prerequisites:
+		1. PHPMyAdmin
+		2. WAMP/XAMP/LAMP server (Depending on the OS)
+		
+	- There are three sample SQL files provided for you to getting the website running. (Folder name: Databases/Tables)
+	- Import all these 3 .sql files in phpMyAdmin, before doing that setup a DB in the same
+	- By following the above steps we are able to setup the DB for server to access.
+
+	Website:
+		- This has two folder and an HTML file
+		- 1st folder "css" has all the css files required to achieve the Design and functionalities.
+		- 2nd folder "img" has an image which is used as a background to the portal
+		- The HTML has to be loaded in the browser
+
+	Now placing these files in the right directory
+	
+	1. LAMP server
+		- Place the given set of files in the following directory "/var/www/html/"
+	2. WAMP/XAMP server
+		- Place the given set of files in the following directory "c:\wamp\www\"
+
+	Once all these files are placed in the right directory, open "http://localhost/index.html" in the browser.
